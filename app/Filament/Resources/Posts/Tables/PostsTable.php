@@ -18,18 +18,38 @@ class PostsTable
     {
         return $table
             ->columns([
+                TextColumn::make('category_id')
+                    ->toggleable(isToggledHiddenByDefault:true)
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('title')
-                    ->color('teal'),
-                TextColumn::make('slug'),
-                TextColumn::make('category.name'),
+                    ->color('teal')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('slug')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('category.name')
+                    ->searchable()
+                    ->sortable(),
                 ColorColumn::make('color'),
                 ImageColumn::make('thumbnail')
                     ->disk('public')
                     ->visibility('public')
                     ->square(),
                 TextColumn::make('tags')
+                    ->searchable()
+                    ->sortable()    
+                    ->toggleable()
                     ->badge(),
-                CheckboxColumn::make('published'),
+                CheckboxColumn::make('published')
+                    ->toggleable(),
+                TextColumn::make('created_at')
+                    ->label('Publicato il')    
+                    ->date()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault:true)
+                    ->searchable(),
             ])
             ->filters([
                 //

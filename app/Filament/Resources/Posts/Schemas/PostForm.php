@@ -26,39 +26,48 @@ class PostForm
                   ->description('Funziona! gloria a voi (sono una descrizione)')
                   ->icon(Heroicon::Trophy)
                   ->schema([ 
+
                 TextInput::make('title')
+                    ->minLength(2)
+                    ->maxLength(10)
                     ->required(),
-                TextInput::make('slug'),
+                TextInput::make('slug')
+                    ->required(),
                 ColorPicker::make('color')
                     ->required(),
                 Select::make('category_id')
                     ->label('Categorie')
                     ->searchable()
-                    ->options(Category::all()->pluck('name','id')),     
+                    ->options(Category::all()->pluck('name','id'))
+                    ->required(),    
                 MarkdownEditor::make('content')
-                    ->columnSpan(2)
-                    ->required(),   
-               ])->columnSpan(2) ->columns(2),     
+                    ->required()
+                    ->columnSpan(2),   
+
+                  ])->columnSpan(2),     
                
               Group::make()->schema([
 
                Section::make('Immagine')
                   ->schema([
+
                 FileUpload::make('thumbnail')
                     ->image()
                     ->disk('public')
                     ->directory('thumbnail')
                     ->visibility('public'),     
-               ]),
+                  ]),
                 
                Section::make('Meta')
-                  ->schema([
+                   ->collapsible()
+                   ->schema([
+
                 TagsInput::make('tags')
                     ->required(),
-                Checkbox::make('published')
-                    ->required(),
+                Checkbox::make('published'),
                   ])
-              ])  
-            ])->columns(4);
+              ]) 
+
+            ])->columns(3);
     }
 }
