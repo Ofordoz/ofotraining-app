@@ -9,7 +9,6 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
 use Filament\Schemas\Schema;
 use Filament\Forms\Components\TextInput;
-use app\Models\Category;
 use Filament\Schemas\Components\Section;
 use Filament\Forms\Components\FileUpload;
 use Filament\Schemas\Components\Group;
@@ -37,8 +36,7 @@ class PostForm
                     ->required(),
                 Select::make('category_id')
                     ->label('Categorie')
-                    ->searchable()
-                    ->options(Category::all()->pluck('name','id'))
+                    ->relationship('category', 'name')
                     ->required(),    
                 MarkdownEditor::make('content')
                     ->required()
