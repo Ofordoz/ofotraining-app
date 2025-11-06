@@ -21,8 +21,8 @@ class PostForm
         return $schema
             ->components([
 
-               Section::make('sono un header')
-                  ->description('Funziona! gloria a voi (sono una descrizione)')
+               Section::make('Creazione Post')
+                  ->description('Funziona! gloria a voi')
                   ->icon(Heroicon::Trophy)
                   ->schema([ 
 
@@ -37,6 +37,8 @@ class PostForm
                 Select::make('category_id')
                     ->label('Categorie')
                     ->relationship('category', 'name')
+                    ->searchable()
+                    ->preload()
                     ->required(),    
                 MarkdownEditor::make('content')
                     ->required()
@@ -44,24 +46,28 @@ class PostForm
 
                   ])->columnSpan(2),     
                
-              Group::make()->schema([
+               Group::make()->schema([
 
-               Section::make('Immagine')
-                  ->schema([
+                Section::make('Immagine')
+                   ->schema([
 
-                FileUpload::make('thumbnail')
+                 FileUpload::make('thumbnail')
                     ->image()
                     ->disk('public')
                     ->directory('thumbnail')
                     ->visibility('public'),     
                   ]),
                 
-               Section::make('Meta')
+                Section::make('Meta')
                    ->collapsible()
                    ->schema([
 
                 TagsInput::make('tags')
                     ->required(),
+                // Select::make('autori') 
+                //     ->multiple()
+                //     ->preload()
+                //     ->relationship('autori','name'),   
                 Checkbox::make('published'),
                   ])
               ]) 

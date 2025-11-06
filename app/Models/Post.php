@@ -23,6 +23,15 @@ class Post extends Model
     ];
 
     public function category() {
-        return $this->belongsTo(category::class);
+        return $this->belongsTo(Category::class);
+    }
+
+
+    
+    public function autori() {
+        return $this->belongsToMany(User::class, 'post_user')
+                    ->withPivot(['order'])
+                    ->withTimestamps();
     }
 }
+

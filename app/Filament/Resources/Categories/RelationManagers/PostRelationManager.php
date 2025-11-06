@@ -38,8 +38,8 @@ class PostRelationManager extends RelationManager
         return $schema
                 ->components([
 
-               Section::make('sono un header')
-                  ->description('Funziona! gloria a voi (sono una descrizione)')
+               Section::make('Creazione Post')
+                  ->description('Funziona! gloria a voi')
                   ->icon(Heroicon::Trophy)
                   ->schema([ 
 
