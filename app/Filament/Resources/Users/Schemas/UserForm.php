@@ -15,7 +15,7 @@ class UserForm
             ->components([
                 TextInput::make('name')
                     ->required()
-                    ->label('nome')
+                    ->label('Nome')
                     ->suffixIcon(Heroicon::Users),
                 TextInput::make('email')
                     ->email()
@@ -23,8 +23,9 @@ class UserForm
                 DateTimePicker::make('email_verified_at'),
                 TextInput::make('password')
                     ->password()
-                    ->visibleOn('create')
-                    ->required(),
+                   // ->visibleOn('create')
+                    ->required((fn (string $context) => $context === 'create'))
+                    ->placeholder(fn (string $context) => $context === 'edit' ? 'Lascia vuoto per non modificare la passowrd' : null),
             ]);
     }
 }

@@ -11,8 +11,11 @@ use Filament\Actions\DetachAction;
 use Filament\Actions\DetachBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -26,14 +29,15 @@ class AutoriRelationManager extends RelationManager
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->required(),
+                    ->readOnly(),
                 TextInput::make('email')
                     ->label('Email address')
                     ->email()
-                    ->required(),
-                DateTimePicker::make('email_verified_at'),
-                TextInput::make('password')
-                    ->password()
+                    ->readOnly(),
+                DateTimePicker::make('email_verified_at')
+                    ->readOnly(),
+                TextInput::make('order')
+                    ->numeric()
                     ->required(),
             ]);
     }
@@ -48,6 +52,8 @@ class AutoriRelationManager extends RelationManager
                 TextColumn::make('email')
                     ->label('Email address')
                     ->searchable(),
+                TextColumn::make('order')
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -62,13 +68,34 @@ class AutoriRelationManager extends RelationManager
             ])
             ->headerActions([
                 //CreateAction::make(),
-                AttachAction::make(),
-            ])
+                AttachAction::make()
+                    ->schema(fn (AttachAction $action): array => [
+                       $action->getRecordSelect(),
+                       TextInput::make('order')->required(),
+                    ])
+                       ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()
+                ->modalHeading('Modifica Order')
+                ->schema([
+                    Section::make()
+                      ->schema ([
+                      TextInput::make('name')
+                        ->readOnly(),
+                      TextInput::make('email')
+                        ->label('Email address')
+                        ->readOnly(),
+                      TextInput::make('order')
+                        ->numeric()
+                        ->required()
+                        ->columnSpanFull(),
+                    ])->columns(2),    
+                ]),
                 DetachAction::make(),
                 //DeleteAction::make(),
-            ])
+                    
+                ])
+
             ->toolbarActions([
                 BulkActionGroup::make([
                     DetachBulkAction::make(),
