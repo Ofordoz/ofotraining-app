@@ -25,7 +25,7 @@ class UserForm
                     ->password()
                    // ->visibleOn('create')
                     ->required((fn (string $context) => $context === 'create'))
-                    ->placeholder(fn (string $context) => $context === 'edit' ? 'Lascia vuoto per non modificare la passowrd' : null),
+                    ->placeholder((fn (string $context) => $context === 'edit' ? 'Lascia vuoto per non modificare la passowrd' : null))
             ]);
     }
 }

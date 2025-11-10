@@ -6,10 +6,14 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Columns\CheckboxColumn;
 use Filament\Tables\Columns\ColorColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 
 class PostsTable
@@ -55,7 +59,15 @@ class PostsTable
                     ->searchable(),
             ])
             ->filters([
-                //
+               // Filter::make('Post pubblicati')
+            //    ->query(fn (Builder $query): Builder =>$query->where('published', true)),
+                TernaryFilter::make('published')
+                    ->label('Post pubblicati'),
+                SelectFilter::make('category_id')
+                    ->relationship('category', 'name')
+                    ->multiple()
+                    ->searchable()
+                    ->preload()
             ])
             ->recordActions([
                 EditAction::make(),
