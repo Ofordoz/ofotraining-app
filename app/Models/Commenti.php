@@ -10,9 +10,7 @@ class Commenti extends Model
 
     use HasFactory;
 
-    //protected $table = 'commentis';
-
-    protected $fillable = [
+        protected $fillable = [
         'user_id',
         'commento',
         'commentabile_id',
