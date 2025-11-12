@@ -33,5 +33,9 @@ class Post extends Model
                     ->withPivot(['order'])
                     ->withTimestamps();
     }
+
+    public function commentis() {
+        return $this->morphMany(Commenti::class, 'commentabile');
+    }
 }
 

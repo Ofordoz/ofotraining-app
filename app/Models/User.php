@@ -52,4 +52,8 @@ class User extends Authenticatable
                     ->withTimestamps();
     }
 
+    public function commentis() {
+        return $this->morphMany(Commenti::class, 'commentabile');
+    }
+
 }

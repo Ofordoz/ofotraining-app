@@ -6,6 +6,7 @@ use App\Filament\Resources\Posts\Pages\CreatePost;
 use App\Filament\Resources\Posts\Pages\EditPost;
 use App\Filament\Resources\Posts\Pages\ListPosts;
 use App\Filament\Resources\Posts\RelationManagers\AutoriRelationManager;
+use App\Filament\Resources\Posts\RelationManagers\CommentisRelationManager;
 use App\Filament\Resources\Posts\Schemas\PostForm;
 use App\Filament\Resources\Posts\Tables\PostsTable;
 use App\Models\Post;
@@ -34,7 +35,8 @@ class PostResource extends Resource
     public static function getRelations(): array
     {
         return [
-            AutoriRelationManager::class
+            AutoriRelationManager::class,
+            CommentisRelationManager::class
         ];
     }
 
