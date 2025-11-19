@@ -27,6 +27,9 @@ class UsersTable
                     ->label('Email address')
                     ->color('teal')
                     ->searchable(),
+                TextColumn::make('role')
+                    ->label('Ruolo')
+                    ->color('danger'),    
                 TextColumn::make('email_verified_at')
                     ->dateTime()
                     ->sortable()
