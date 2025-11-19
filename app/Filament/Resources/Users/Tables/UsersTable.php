@@ -28,8 +28,18 @@ class UsersTable
                     ->color('teal')
                     ->searchable(),
                 TextColumn::make('role')
+                    ->formatStateUsing(fn ($state) => strtoupper($state))    
                     ->label('Ruolo')
-                    ->color('danger'),    
+                    ->badge()    
+                    ->color(function(string $state) : string{
+                        return match($state) {
+                            'ADMIN' => 'danger',
+                            'EDITOR' => 'info',
+                            'USER' => 'success',
+                        };
+                    })
+                    ->sortable()
+                    ->searchable(),                        
                 TextColumn::make('email_verified_at')
                     ->dateTime()
                     ->sortable()

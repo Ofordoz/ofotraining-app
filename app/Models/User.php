@@ -15,14 +15,14 @@ class User extends Authenticatable implements FilamentUser
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
     
-    const ROLE_ADMIN  = 'admin';
-    const ROLE_EDITOR = 'editor';
-    const ROLE_USER   = 'user';
+    const ROLE_ADMIN  = 'ADMIN';
+    const ROLE_EDITOR = 'EDITOR';
+    const ROLE_USER   = 'USER';
 
     const ROLES = [
-        self::ROLE_ADMIN => 'Admin',
-        self::ROLE_EDITOR => 'Editor',
-        self::ROLE_USER => 'User'
+        self::ROLE_ADMIN => 'ADMIN',
+        self::ROLE_EDITOR => 'EDITOR',
+        self::ROLE_USER => 'USER'
     ];
 
     public function canAccessPanel(Panel $panel): bool
