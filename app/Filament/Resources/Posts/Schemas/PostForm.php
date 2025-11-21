@@ -15,7 +15,9 @@ use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Support\Icons\Heroicon;
+use Illuminate\Support\Str;
 
 class PostForm
 {
@@ -32,7 +34,14 @@ class PostForm
                         TextInput::make('title')
                             ->minLength(2)
                             ->maxLength(10)
-                            ->required(),
+                            ->required()
+
+                            ->live(onBlur:true)
+                            ->afterStateUpdated(function (string $state, string $operation, Set $set) {
+                                if ($operation === 'edit') {return;}     
+                                $set('slug', Str::slug($state));
+                            }),
+                    
                         TextInput::make('slug')
                             ->required(),
                         ColorPicker::make('color')
@@ -42,7 +51,7 @@ class PostForm
                             ->relationship('category', 'name')
                             ->searchable()
                             ->preload()
-                            ->required(),    
+                            ->required(),
                         MarkdownEditor::make('content')
                             ->required()
                             ->columnSpan(4),   
