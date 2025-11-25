@@ -23,7 +23,7 @@ class CommentiResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Social';
+    protected static ?string $navigationParentItem = 'Utenti ';
 
     protected static ?int $navigationSort = 3;
 

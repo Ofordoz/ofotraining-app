@@ -19,6 +19,10 @@ class CommentiForm
             ->components([
                 Select::make('user_id')
                     ->label('Utente')
+                  // ->visible(fn ($operation) => $operation === 'create')
+                    ->disabled(function ($operation) {
+                        if ($operation === 'edit') return true;
+                    })
                     ->relationship('user','name'),
                 TextInput::make('commento'),
                 MorphToSelect::make('commentabile')
@@ -26,7 +30,10 @@ class CommentiForm
                         Type::make(Post::class)->titleAttribute('title'),
                         Type::make(User::class)->titleAttribute('name'),
                         Type::make(Category::class)->titleAttribute('name')
-                    ]),
+                    ])
+                    ->disabled(function ($operation) {
+                        if ($operation === 'edit') return true;
+                    }),
             ]);
     }
 }
