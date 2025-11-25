@@ -11,8 +11,12 @@ use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class NumeroPost extends StatsOverviewWidget
+
 {
+    protected int | string | array $columnSpan = 1;
+    
     protected function getStats(): array
+    
     {
         return [
             Stat::make('Numero post totali', Post::count())
@@ -22,11 +26,7 @@ class NumeroPost extends StatsOverviewWidget
                 ->descriptionColor('danger')
                 ->descriptionIcon(Heroicon::Calculator, IconPosition::After)
                 ->chart([100,50,0,100])
-                ->chartColor('success')
-                ->columnSpan(2),
-
-            Stat::make('Numero utenti totali', User::count()),
+                ->chartColor('success'),
         ];
-
     }
 }

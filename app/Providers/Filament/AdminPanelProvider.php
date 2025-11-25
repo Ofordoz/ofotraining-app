@@ -2,6 +2,8 @@
 
 namespace App\Providers\Filament;
 
+use App\Livewire\ChartLine;
+use App\Livewire\ChartWidget;
 use App\Livewire\NumeroPost;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -44,7 +46,9 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
+                ChartWidget::class,
                 NumeroPost::class,
+                ChartLine::class,
                 //AccountWidget::class,
                 //FilamentInfoWidget::class,
             ])
