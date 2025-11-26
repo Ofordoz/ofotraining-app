@@ -31,31 +31,31 @@ class PostForm
                    Tab::make('Creazione Post')   
                      ->icon('heroicon-s-newspaper')
                      ->schema([
-                        TextInput::make('title')
-                            ->minLength(2)
-                            ->maxLength(10)
-                            ->required()
+                        Group::make()->schema ([
+                              TextInput::make('title')
+                                 ->minLength(2)
+                                 ->maxLength(10)
+                                 ->required()
+                                 ->live(onBlur:true)
+                                 ->afterStateUpdated(function (string $state, string $operation, Set $set) {
+                                    if ($operation === 'edit') {return;}     
+                                    $set('slug', Str::slug($state));
+                                 }),
+                              TextInput::make('slug')
+                                 ->required(),
+                              ColorPicker::make('color')
+                                 ->required(),
+                              Select::make('category_id')
+                                 ->label('Categorie')
+                                 ->relationship('category', 'name')
+                                 ->searchable()
+                                 ->preload()
+                                 ->required(),
+                        ])->columns(4),
 
-                            ->live(onBlur:true)
-                            ->afterStateUpdated(function (string $state, string $operation, Set $set) {
-                                if ($operation === 'edit') {return;}     
-                                $set('slug', Str::slug($state));
-                            }),
-                    
-                        TextInput::make('slug')
-                            ->required(),
-                        ColorPicker::make('color')
-                            ->required(),
-                        Select::make('category_id')
-                            ->label('Categorie')
-                            ->relationship('category', 'name')
-                            ->searchable()
-                            ->preload()
-                            ->required(),
                         MarkdownEditor::make('content')
-                            ->required()
-                            ->columnSpan(4),   
-                        ]),
+                            ->required(),  
+                    ]),
                
                    Tab::make('Immagine')
                       ->icon('heroicon-s-cloud')

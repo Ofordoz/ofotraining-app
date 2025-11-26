@@ -6,7 +6,7 @@ use Filament\Widgets\ChartWidget as BaseChartWidget;
 
 class ChartWidget extends BaseChartWidget
 {
-    protected ?string $heading = 'Chart Widget';
+    protected ?string $heading = 'Ciambella di prova';
     
     protected int | string | array $columnSpan = 1;
 

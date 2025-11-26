@@ -23,9 +23,15 @@ class CategoryForm
                                           $set('slug',Str::slug($state));
                                         })
                     ->live(onBlur:true)
+                    ->required(fn (string $operation) => $operation == 'create')
                     ->unique(),
                 TextInput::make('slug')
-                    ->unique(),
+                    ->unique()
+                    ->required(function (string $operation) {
+                        if ($operation == 'create') {
+                            return true;
+                        };
+                    })
             ]);
     }
 }

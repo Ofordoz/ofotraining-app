@@ -16,21 +16,22 @@ class UserForm
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->required()
+                    ->required(fn (string $operation) => $operation == 'create')
                     ->label('Nome')
                     ->suffixIcon(Heroicon::Users),
                 TextInput::make('email')
                     ->email()
-                    ->required(),
+                    ->required(fn (string $operation) => $operation == 'create'),
                 DateTimePicker::make('email_verified_at'),
                 TextInput::make('password')
                     ->password()
                    // ->visibleOn('create')
-                    ->required((fn (string $context) => $context === 'create'))
-                    ->placeholder((fn (string $context) => $context === 'edit' ? 'Lascia vuoto per non modificare la password' : null))
+                    ->required((fn (string $operation) => $operation === 'create'))
+                    ->placeholder((fn (string $operation) => $operation === 'edit' ? 'Lascia vuoto per non modificare la password' : null))
                     ->dehydrated(fn ($state) => filled($state)),
                 Select::make('role')
                     ->options(User::ROLES)
+                    ->required((fn (string $operation) => $operation === 'create'))
             ]);
     }
 }
