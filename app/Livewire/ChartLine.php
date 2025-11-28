@@ -67,7 +67,7 @@ class ChartLine extends ChartWidget
             default:    
             $trend = Trend::model(User::class)
                 ->between(
-                    start: $inizio ? Carbon::parse ($inizio) : now()->startOfYear(),
+                    start: $inizio ? Carbon::parse ($inizio)  : now()->startOfYear(),
                     end: $fine ? Carbon::parse ($fine) : now()->endOfYear(),
                 )
                 ->perDay()

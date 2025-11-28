@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Posts\Pages;
 
 use App\Filament\Resources\Posts\PostResource;
+use App\Livewire\NumeroPost;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Schemas\Components\Tabs\Tab;
@@ -35,4 +36,5 @@ class ListPosts extends ListRecords
             ->modifyQueryUsing(fn (Builder $query) => $query->where('Category_id', 3)),    
         ];
     }
+
 }
