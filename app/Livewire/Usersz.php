@@ -17,8 +17,8 @@ class Usersz extends StatsOverviewWidget
     {
         return [
             Stat::make('Nome utente:', $this->record->name),
-            Stat::make('Numero post:', $this->record->posts()->count()),
-            Stat::make('Numero commenti:', $this->record->commentis()->count()),
+            Stat::make('Numero post:', $this->record->posts->count()),
+            Stat::make('Numero commenti:', $this->record->commentis->count()),
         ];
     }
 }

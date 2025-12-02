@@ -23,8 +23,9 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class PostsRelationManager extends RelationManager
-{
+{    
     protected static string $relationship = 'posts';
+    protected static ?string $title = 'I miei post';
 
     public function form(Schema $schema): Schema
     {

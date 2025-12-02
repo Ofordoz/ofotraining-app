@@ -26,7 +26,8 @@ use Filament\Tables\Table;
 class CommentisRelationManager extends RelationManager
 {
     protected static string $relationship = 'commentis';
-   
+    protected static ?string $title = 'Commenti';
+
     public function form(Schema $schema): Schema
     {
          return $schema

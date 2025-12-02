@@ -26,4 +26,5 @@ class EditUser extends EditRecord
           Usersz::class
         ];
     }
+
 }
