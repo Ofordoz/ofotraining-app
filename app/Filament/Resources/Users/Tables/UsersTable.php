@@ -2,14 +2,17 @@
 
 namespace App\Filament\Resources\Users\Tables;
 
+use App\Filament\Exports\UserExporter;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Forms\Components\TextInput;
+use Filament\Actions\ExportAction;
+use Filament\Actions\ExportBulkAction;
+use Filament\Actions\Exports\Enums\ExportFormat;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Filament\Support\Icons\Heroicon;
+
 
 class UsersTable
 {
@@ -57,6 +60,12 @@ class UsersTable
                     ->toggleable(isToggledHiddenByDefault: true),
                     
             ])
+            ->headerActions([
+                ExportAction::make()
+                ->exporter(UserExporter::class)
+                ->formats([
+                    ExportFormat::Csv]),
+            ])
             ->filters([
                 //
             ])
@@ -68,6 +77,11 @@ class UsersTable
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
-            ]);
+                ExportBulkAction::make()
+                ->exporter(UserExporter::class)
+                ->formats([
+                    ExportFormat::Csv]),
+                ]);
+            
     }
 }
