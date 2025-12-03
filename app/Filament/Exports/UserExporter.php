@@ -3,7 +3,6 @@
 namespace App\Filament\Exports;
 
 use App\Models\User;
-use Filament\Actions\ExportAction;
 use Filament\Actions\Exports\ExportColumn;
 use Filament\Actions\Exports\Exporter;
 use Filament\Actions\Exports\Models\Export;
@@ -16,22 +15,15 @@ class UserExporter extends Exporter
     public static function getColumns(): array
     {
         return [
+            ExportColumn::make('id'),
             ExportColumn::make('name'),
             ExportColumn::make('email'),
-            ExportColumn::make('role'),
-        ];
-    }
-
-    public static function getActions(): array
-    {
-        return [
-            ExportAction::make()
         ];
     }
 
     public static function getCompletedNotificationBody(Export $export): string
     {
-        $body = 'Your users export has completed and ' . Number::format($export->successful_rows) . ' ' . str('row')->plural($export->successful_rows) . ' exported.';
+        $body = 'Your user export has completed and ' . Number::format($export->successful_rows) . ' ' . str('row')->plural($export->successful_rows) . ' exported.';
 
         if ($failedRowsCount = $export->getFailedRowsCount()) {
             $body .= ' ' . Number::format($failedRowsCount) . ' ' . str('row')->plural($failedRowsCount) . ' failed to export.';

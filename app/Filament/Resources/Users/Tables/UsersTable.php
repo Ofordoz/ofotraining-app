@@ -62,10 +62,12 @@ class UsersTable
             ])
             ->headerActions([
                 ExportAction::make()
-                ->exporter(UserExporter::class)
-                ->formats([
-                    ExportFormat::Csv]),
-            ])
+                    ->exporter(UserExporter::class)
+                    ->formats([
+                        ExportFormat::Csv,
+                        ExportFormat::Xlsx,
+                    ]),
+                ])        
             ->filters([
                 //
             ])
@@ -80,7 +82,9 @@ class UsersTable
                 ExportBulkAction::make()
                 ->exporter(UserExporter::class)
                 ->formats([
-                    ExportFormat::Csv]),
+                    ExportFormat::Csv,
+                    ExportFormat::Xlsx,
+                ]),
                 ]);
             
     }
